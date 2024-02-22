@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Cross-browser compatibility and testing</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>Cross-browser compatibility and testing</section>
+				<section>
+					<img src="./assets/images/browsers.webp" />
+				</section>
+				<section>Why it happens?
+					<ul>
+						<li>Sometimes browsers contain bugs, or implement features differently.</li>
+						<li>Browsers have varying degrees of support for modern technologies.</li>
+					</ul>
+				</section>
+				<section>
+					<ul>How to fix it?
+						<li>Use semantic HTML.</li>
+						<li>Apply CSS wisely</li>
+						<li>Use polyfills.</li>
+						<li>Conduct thorough testing.</li>
+					</ul>
+				</section>
+				<section>
+						<section>What exactly need to do?</section>
+						<section>Validate HTML and CSS with w3c validator and css validator</section>
+					<section>HTML fallback
+						<pre><code><video
+	id="video"
+	controls
+	preload="metadata"
+	poster="img/poster.jpg"
+>
+<source
+	src="video/tears-of-steel-battle-clip-medium.webm"
+	type="video/webm" />
+	<!-- Offer download -->
+	<p>
+		Your browser does not support WebM video; here is a link to
+		<a href="video/tears-of-steel-battle-clip-medium.mp4"
+		>view the video directly</a>
+	</p>
+</video></code></pre>
+					</section>
+					<section>
+						<pre><code>button {
+	/* … */				
+	background-color: #ff0000;
+	background-color: rgb(255 0 0 / 100%);
+}</code></pre>
+					</section>
+					<section>
+						<pre><code>.masked {
+	-webkit-mask-image: url(MDN.svg);
+	mask-image: url(MDN.svg);
+	-webkit-mask-size: 50%;
+	mask-size: 50%;
+}</code></pre>
+					</section>
+					<section>
+						<pre><code>if (window.XMLHttpRequest) {
+	// Mozilla, Safari, IE7+ ...
+	httpRequest = new XMLHttpRequest();
+} else if (window.ActiveXObject) {
+	// IE 6 and older
+	httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+}</code></pre>
+<pre><code>if ("geolocation" in navigator) {
+	navigator.geolocation.getCurrentPosition((position) => {
+  // show the location on a map, perhaps using the Google Maps API
+  });
+} else {
+  // Give the user a choice of static maps instead perhaps
+}</code></pre>
+					</section>
+				</section>
+				<section>
+					<ul>Tools
+						<li>caniuse.com</li>
+						<li>https://www.browserling.com/</li>
+					</ul>
+
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				hash: true,
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
